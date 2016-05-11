@@ -4,72 +4,102 @@ from django.db import models
 
 # Create your models here.
 
-class Departamento(models.model):
-	ID_Departamento = models.AutoField(Primary_key = True )
-	Nombre = models.charfield(max_length = 30 )
+class Departamento(models.Model):
+	ID_Departamento = models.AutoField(primary_key = True )
+	Nombre = models.CharField(max_length = 30 )
+
+	def __unicode__(self):
+		return self.Nombre
 
 
-class Ciudad(models.model):
-	ID_Ciudad = models.AutoField(Primary_key = True)
-	ID_Departamento = models.ForeignKey(Departamento)
-	Nombre = models.charfield(max_length = 30 )
+class Ciudade(models.Model):
+	ID_Ciudad = models.AutoField(primary_key = True)
+	Departamento = models.ForeignKey(Departamento)
+	Nombre = models.CharField(max_length = 30 )
+
+	def __unicode__(self):
+		return self.Nombre
 
 
-class Casa(models.model):
-	ID_Casa = models.AutoField(Primary_key = True)
-	Nombre = models.charfield(max_length = 30)
-	Direccion = models.charfield(max_length = 30)
+class Casa(models.Model):
+	ID_Casa = models.AutoField(primary_key = True)
+	Nombre = models.CharField(max_length = 30)
+	Direccion = models.CharField(max_length = 30)
+
+	def __unicode__(self):
+		return self.Nombre
 
 
-class Marca(models.model):
-	ID_Marca = models.AutoField(Primary_key = 30)
-	Nombre = models.charfield(max_length = 30)
-	ID_Casa = models.ForeignKey(Casa)
+class Marca(models.Model):
+	ID_Marca = models.AutoField(primary_key = 30)
+	Nombre = models.CharField(max_length = 30)
+	Casa = models.ForeignKey(Casa)
+
+	def __unicode__(self):
+		return self.Nombre
 
 
-class Modelo(models.model):
-	ID_Modelo = models.AutoField(Primary_key = 30)
-	Nombre = models.charfield(max_length = 30)
-	ID_Marca = models.ForeignKey(Marca)
+class Modelo(models.Model):
+	ID_Modelo = models.AutoField(primary_key = 30)
+	Nombre = models.CharField(max_length = 30)
+	Marca = models.ForeignKey(Marca)
+
+	def __unicode__(self):
+		return self.Nombre
 
 
-class Tipo_Persona (models.model):
-	ID_Tipo_Persona = models.charfield(max_length = 15 , Primary_key = True)
-	Nombre = models.charfield(max_length = 30)
-	Descripcion = models.charfield(max_length =50)
+class Tipo_Persona (models.Model):
+	ID_Tipo_Persona = models.CharField(max_length = 15 , primary_key = True)
+	Nombre = models.CharField(max_length = 30)
+	Descripcion = models.CharField(max_length =50)
+
+	def __unicode__(self):
+		return self.Nombre
 
 
-class Persona(models.model):
-	ID_Persona = models.charfield(max_length = 15, Primary_key = True)
-	Nombre = models.charfield(max_length = 30)
-	Apellido = models.charfield(max_length = 30)
-	Direccion = models.charfield(max_length = 30)
-	ID_Ciudad = models.ForeignKey(Ciudad)
-	ID_Tipo_Persona = models.ForeignKey(Tipo_Persona)
+class Persona(models.Model):
+	ID_Persona = models.CharField(max_length = 15, primary_key = True)
+	Nombre = models.CharField(max_length = 30)
+	Apellido = models.CharField(max_length = 30)
+	Direccion = models.CharField(max_length = 30)
+	Ciudad = models.ForeignKey(Ciudade)
+	Tipo_Persona = models.ForeignKey(Tipo_Persona)
+
+	def __unicode__(self):
+		return self.Nombre
 
 
-class Infracciones(models.model):
-	ID_Infracciones = models.AutoField(Primary_key=True)
-	ID_Persona = models.ForeignKey(Persona)
-	Lugar = models.charfield(max_length = 30)
+class Infracciones(models.Model):
+	ID_Infracciones = models.AutoField(primary_key=True)
+	Persona = models.ForeignKey(Persona)
+	Lugar = models.CharField(max_length = 30)
+
+	def __unicode__(self):
+		return self.Lugar
 
 
-class Vehiculo(models.model):
-	ID_vehicuo = models.charfield(max_length = 7 , Primary_key = True)
-	ID_Persona = models.ForeignKey(Persona)
-	ID_Modelo = models.ForeignKey(Modelo)
-	Fecha_Matriculacion = models.charfield(max_length = 8)
+class Vehiculo(models.Model):
+	ID_vehicuo = models.CharField(max_length = 7 , primary_key = True)
+	Persona = models.ForeignKey(Persona)
+	Modelo = models.ForeignKey(Modelo)
+	Fecha_Matriculacion = models.CharField(max_length = 8)
+
+	def __unicode__(self):
+			return self.ID_vehicuo
 
 
-class Multa(models.model):
-	ID_Multa = models.AutoField(Primary_key = True)
-	ID_Persona = models.ForeignKey(Persona)
-	ID_vehicuo = models.ForeignKey(Vehiculo)
-	Fecha = models.charfield(max_length = 8)
-	Articulo = models.charfield(max_length = 120)
+
+class Multa(models.Model):
+	ID_Multa = models.AutoField(primary_key = True)
+	Persona = models.ForeignKey(Persona)
+	vehicuo = models.ForeignKey(Vehiculo)
+	Fecha = models.CharField(max_length = 8)
+	Articulo = models.CharField(max_length = 120)
 	Costo = models.IntegerField()
-	ID_Infracciones = models.ForeignKey(Infracciones)
+	Infracciones = models.ForeignKey(Infracciones)
 
+	def __unicode__(self):
+		return self.Articulo
 
 
 
