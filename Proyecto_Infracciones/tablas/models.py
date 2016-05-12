@@ -82,7 +82,7 @@ class Vehiculo(models.Model):
 	ID_vehicuo = models.CharField(max_length = 7 , primary_key = True)
 	Persona = models.ForeignKey(Persona)
 	Modelo = models.ForeignKey(Modelo)
-	Fecha_Matriculacion = models.CharField(max_length = 8)
+	Fecha_Matriculacion = models.DateTimeField(auto_now = False , auto_now_add = False)
 
 	def __unicode__(self):
 			return self.ID_vehicuo
@@ -93,7 +93,7 @@ class Multa(models.Model):
 	ID_Multa = models.AutoField(primary_key = True)
 	Persona = models.ForeignKey(Persona)
 	vehicuo = models.ForeignKey(Vehiculo)
-	Fecha = models.CharField(max_length = 8)
+	Fecha = models.DateTimeField(auto_now = False , auto_now_add = False)
 	Articulo = models.CharField(max_length = 120)
 	Costo = models.IntegerField()
 	Infracciones = models.ForeignKey(Infracciones)
