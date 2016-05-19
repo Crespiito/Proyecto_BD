@@ -1,0 +1,14 @@
+h1{
+	width: 100%;
+	background-color: #adebad;
+	}
+
+form#formulario1{
+	border-spacing: 10;
+	background-color: #adebad;
+	border: thin  dashed #33cc33;
+}
+
+body{
+	background-color:#99ff99;
+}

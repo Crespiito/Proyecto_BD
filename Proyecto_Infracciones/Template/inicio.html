@@ -10,11 +10,36 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 </head>
 <body>
-	<h1>Primera vista</h1>
-	<p>
-	vamo a escribir mamadas :v
-	</p>
-<button class="btm btn-primary">button</button>
-{% bootstrap_javascript jquery=True %}
+<header>
+	<div class="container">
+		<h1><center>Infracciones</center></h1>
+	</div>
+</header>	
+
+<div class="container">
+	<section class="main row">
+		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" >
+			<p>
+				<h1><center>Consultas</center></h1>
+				<form method="POST">
+					{% csrf_token %}
+					<center>{% bootstrap_form form %}</center>
+					<center>
+					<button class="btn btn-primary">Consulta</button>
+					<button class="btn btn-primary" type="reset">Restablecer</button>
+					</center>
+					
+				</form>
+			</p>
+		</div>
+
+		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" >
+			<p>
+				<h1><center>Panel Administrativo</center></h1>
+				<center><a class="btn btn-primary" href="/Administradores/" >Ver</a></center>
+		</div>
+	</section>
+</div>
+
 </body>
 </html>

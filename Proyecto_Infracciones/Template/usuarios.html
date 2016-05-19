@@ -1,0 +1,23 @@
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<div class="container" >
+{% if form %}
+<center><h1>Bienvenido al sistema de consulta de multas</h1></center>
+{% endif %}	
+{% if not form %}
+<center><a class="btn btn-primary" href=".." ="" >Volver</a></center>	
+{% endif %}
+
+</div>
+
+</body>
+</html>

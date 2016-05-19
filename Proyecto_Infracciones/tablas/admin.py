@@ -4,6 +4,8 @@ from django.contrib import admin
 
 from .models import Departamento,Ciudade,Casa,Modelo,Marca,Vehiculo,Tipo_Persona,Persona,Infracciones,Multa
 
+from forms import *
+
 admin.site.register(Departamento)
 admin.site.register(Ciudade)
 admin.site.register(Casa)
@@ -14,3 +16,4 @@ admin.site.register(Tipo_Persona)
 admin.site.register(Persona)
 admin.site.register(Infracciones)
 admin.site.register(Multa)
+admin.site.register(Civile)

@@ -1,0 +1,57 @@
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<header>
+	<div class="container">
+		<h1><center>Panel Administrativo</center></h1>
+	</div>
+</header>
+
+<div class="container">
+	<section class="main row">
+		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" >
+			<p>
+				<h1><center>Agentes</center></h1>
+				<form method="POST">
+					{% csrf_token %}
+					<center>{% bootstrap_form form_Agentes %}</center>
+					<center>
+					<button class="btn btn-primary" name = "Agente">Consulta</button>
+					<button class="btn btn-primary" type="reset">Restablecer</button>
+					</center>
+					
+				</form>
+			</p>
+		</div>
+
+		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" >
+			<p>
+				<h1><center>Administradores</center></h1>
+				<form method="POST">
+					{% csrf_token %}
+					<center>{% bootstrap_form form_Admin %}</center>
+					<center>
+					<button class="btn btn-primary" name= "Admin">Consulta</button>
+					<button class="btn btn-primary" type="reset">Restablecer</button>
+					</center>
+					
+				</form>
+		</div>
+	</section>
+</div>	
+
+<div class="container">
+			<center><a class="btn btn-primary" href=".." ="" >Volver</a></center>
+</div>
+	
+</body>
+</html>
