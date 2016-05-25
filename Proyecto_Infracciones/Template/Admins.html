@@ -1,5 +1,6 @@
 {% load bootstrap3 %}
 {% bootstrap_css %}
+{% load staticfiles %}
 {% bootstrap_javascript %}
 
 <!DOCTYPE html>
@@ -7,11 +8,64 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/Styles.css' %}">
 </head>
 <body>
+
+{% if Admin %}
+<header>
 <div class="container">
 	<center><h1> Vista Administradores</h1></center>
 </div>
+</header>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <table class="table table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th class="col-sm-1">Lugar</th>
+                <th class="col-sm-2">ID Persona</th>
+                <th class="col-sm-2">ID Agente</th>
+                <th class="col-sm-2">Fecha</th>
+                <th class="col-sm-3">Infraccion</th>
+                <th class="col-sm-1">Estado</th>
+                <th class="col-sm 1">Retirar</th>
+            </tr>
+        </thead>
+    <tbody>
+            {% for Multa in Multas %}
+                <tr>
+                    <td>{{ Multa.Lugar }}</td>
+                    <td>{{ Multa.ID_Persona.ID_Persona }}</td>
+                    <td>{{ Multa.ID_Agente.ID_Persona.ID_Persona }}</td>
+                    <td>{{ Multa.Fecha }}</td>
+                    <td>{{ Multa.ID_Infracciones.Articulo }}</td>
+                    <td class="warning" >{{ Multa.ID_Pago.Estado }}</td>
+                    {% if "Deuda" in Multa.ID_Pago.Estado %}
+                        <td class="warning"> No Pago </td> 
+                    {% else %}
+                        <td>
+                            <form method="POST" action="/Delet/{{ Multa.id }}/{{ Admin.id }}/" >
+                                {% csrf_token %}
+                                <button class="btn btn-primary">Retirar</button>
+                            </form>
+                        </td>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>	
+
+</div>
+
+<div class="container">
+            <center><a class="btn btn-primary" href="../Administradores" ="" >Volver</a></center>
+</div>
+{% endif %}
+
+{% if not Admin %}
+<center><a class="btn btn-primary" href=".." ="" >Volver</a></center>   
+{% endif %}
 	
 </body>
 </html>

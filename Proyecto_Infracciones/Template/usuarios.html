@@ -1,5 +1,6 @@
 {% load bootstrap3 %}
 {% bootstrap_css %}
+{% load staticfiles %}
 {% bootstrap_javascript %}
 
 <!DOCTYPE html>
@@ -9,15 +10,66 @@
 	<title>Document</title>
 </head>
 <body>
+{% if Usuario %}
+
 <div class="container" >
-{% if form %}
-<center><h1>Bienvenido al sistema de consulta de multas</h1></center>
-{% endif %}	
-{% if not form %}
+<center><h1>Bienvenido {{Usuario.Nombre}}</h1></center>
+<link rel="stylesheet" href="{% static 'css/Styles.css' %}">
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<table class="table table-condensed table-bordered">
+	    <thead>
+	        <tr>
+	            <th class="col-sm-1">Lugar</th>
+	            <th class="col-sm-2">ID Persona</th>
+	            <th class="col-sm-2">ID Agente</th>
+	            <th class="col-sm-2">Fecha</th>
+	            <th class="col-sm-3">Infraccion</th>
+	            <th class="col-sm-1">Estado</th>
+	            <th class="col-sm 1">Pagar</th>
+	        </tr>
+	    </thead>
+	<tbody>
+	        {% for Multa in Multas %}
+	            <tr>
+	                <td>{{ Multa.Lugar }}</td>
+	                <td>{{ Multa.ID_Persona.ID_Persona }}</td>
+	                <td>{{ Multa.ID_Agente.ID_Persona.ID_Persona }}</td>
+	                <td>{{ Multa.Fecha }}</td>
+	                <td>{{ Multa.ID_Infracciones.Articulo }}</td>
+	                <td>{{ Multa.ID_Pago.Estado }}</td> 
+	                {% if "Deuda" in Multa.ID_Pago.Estado %}
+	                	<td class="danger">
+	                	<form method="POST" action="/usuario/{{ Multa.id }}/" >
+	                		{% csrf_token %}
+							<center><button class="< btn btn-primary">Pagar</button></center>
+						</form>
+						</td>
+					{% else %}
+					<td class="success"> Pago </td>	
+					{% endif %}
+						
+	                
+	            </tr>
+	        {% endfor %}
+	    </tbody>
+	</table>	
+
+</div>
+
+<div class="container">
+			<center><a class="btn btn-primary" href=".." ="" >Volver</a></center>
+</div>
+
+
+
+{% endif %}
+
+{% if not Usuario %}
 <center><a class="btn btn-primary" href=".." ="" >Volver</a></center>	
 {% endif %}
 
-</div>
 
 </body>
 </html>

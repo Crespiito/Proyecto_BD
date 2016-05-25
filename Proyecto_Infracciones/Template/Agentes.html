@@ -1,5 +1,6 @@
 {% load bootstrap3 %}
 {% bootstrap_css %}
+{% load staticfiles %}
 {% bootstrap_javascript %}
 
 <!DOCTYPE html>
@@ -7,11 +8,25 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<link rel="stylesheet" href="{% static 'css/Styles.css' %}">
 </head>
 <body>
+{% if Agente %}
 <div class="container">
 	<center><h1> Vista de Agentes </h1></center>
-
+	<form method="POST" action="Check/{{ Agente.id }}/">
+		<center>{% bootstrap_form Multa %}</center>
+				{% csrf_token %}
+		<center>
+		<button class="btn btn-primary" name = "Agente" >Multar</button>
+		<a class="btn btn-primary" href="../Administradores" ="" >Volver</a>
+		</center>
+	</form>
 </div>
+
+{% endif %}
+{% if not Agente %}
+<center><a class="btn btn-primary" href=".." ="" >Volver</a></center>	
+{% endif %}
 </body>
 </html>

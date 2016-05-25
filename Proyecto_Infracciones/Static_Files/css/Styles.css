@@ -1,14 +1,53 @@
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}
+
+
 h1{
-	width: 100%;
-	background-color: #adebad;
+	width: 100%; 
+	font-family: fantasy;
+	color: #ffffff;
+	font-size: 2em;
+
 	}
+
+th,td,table-layout{
+	color: #ffffff;
+}
+
+label{
+	color: #ffffff;
+}
 
 form#formulario1{
 	border-spacing: 10;
-	background-color: #adebad;
+	background-color: #b3ccff;
 	border: thin  dashed #33cc33;
 }
 
+header{
+	background-color: #0080ff;
+	font-size: xx-large;
+
+}
+
 body{
-	background-color:#99ff99;
+	background-color: #1a1a1a;
+}
+
+td.success , td.warning{
+	color: #000000;
+} 
+
+div#Inicio_izquierda{
+	font-size: 1.5em;
+	max-height: 225px;
+}
+
+div#Inicio_derecha{
+	font-size: 1.5em;
+ 	max-height: 225px;
 }

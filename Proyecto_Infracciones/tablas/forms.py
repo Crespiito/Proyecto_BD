@@ -3,16 +3,20 @@ from models import *
 
 def Get_ID_Persona(Object , Dato , Tipo):
 		try:
-		 	return Object.objects.get(ID_Persona= Dato.get("ID_Persona") ,Tipo_Persona = Tipo)
+		 	return Object.objects.get(ID_Persona= Dato.get("ID_Persona") ,ID_Tipo_Persona = Tipo)
 		except Object.DoesNotExist:
 			return None
+
+def clean(Object):
+	Dato = Object.cleaned_data.copy()
+	return Dato
 
 
 class login_Usuarios(forms.Form):
 	ID_Persona = forms.CharField(label="ID Persona",max_length = 30)
 
 	def clean_ID_Persona(self):
-		Dato = self.cleaned_data
+		Dato = clean(self)
 		Tipo = Tipo_Persona.objects.get(Nombre = "Civil")	
 		ID = Get_ID_Persona(Civile,Dato,Tipo)
 		if ID == None :
@@ -22,9 +26,9 @@ class login_Usuarios(forms.Form):
 
 class login_Agente(forms.Form):
 	ID_Persona = forms.CharField(label="ID Agente",max_length = 30)
-
+	
 	def clean_ID_Persona(self):
-		Dato = self.cleaned_data
+		Dato = clean(self)
 		Tipo = Tipo_Persona.objects.get(Nombre = "Agente")
 		ID = Get_ID_Persona(Civile,Dato,Tipo)
 		if ID == None :
@@ -32,11 +36,22 @@ class login_Agente(forms.Form):
 		else:
 			return Dato
 
+	def Get_Agente(self):
+		Dato = clean(self)
+		Tipo = Tipo_Persona.objects.get(Nombre = "Agente")
+		ID = Get_ID_Persona(Civile,Dato,Tipo)
+		if ID == None :
+			return None
+		else:
+			return Dato.copy()
+
+
+
 class login_Admin(forms.Form):
 	ID_Persona = forms.CharField(label="ID Admin",max_length = 30)
 
 	def clean_ID_Persona(self):
-		Dato = self.cleaned_data
+		Dato = clean(self)
 		Tipo = Tipo_Persona.objects.get(Nombre = "Admin")
 		ID = Get_ID_Persona(Civile,Dato,Tipo)
 		if ID == None :
@@ -44,6 +59,14 @@ class login_Admin(forms.Form):
 		else:
 			return Dato
 
+
+class MultaForm(forms.ModelForm):
+	class Meta:
+		model = Multa
+		fields = ["Lugar","ID_Persona","ID_Agente","ID_vehicuo","ID_Infracciones","ID_Pago"]
+		
+
+	
 
 
 class registro(forms.Form):
